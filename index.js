@@ -29,6 +29,10 @@ if (process.env.MSB_LOGGLY_SUBDOMAIN && process.env.MSB_LOGGLY_TOKEN) {
       process.exit(1);
     });
   });
+
+  setImmediate(function() {
+    client.log(formatter.started());
+  });
 } else {
   process.once('uncaughtException', function(err) {
     throw err;

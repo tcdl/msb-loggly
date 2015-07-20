@@ -1,5 +1,15 @@
 var os = require('os');
 
+exports.started = function() {
+  return {
+    level: 'notice',
+    timestamp: new Date(),
+    message: 'started',
+    process: exports.processInfo(),
+    os: exports.osInfo()
+  };
+};
+
 exports.exception = function(err) {
   return {
     level: 'critical',
@@ -9,22 +19,8 @@ exports.exception = function(err) {
       code: err.code || undefined,
       stack: err.stack && err.stack.split('\n'),
     },
-    process: {
-      pid: process.pid,
-      uid: process.getuid ? process.getuid() : null,
-      gid: process.getgid ? process.getgid() : null,
-      cwd: process.cwd(),
-      execPath: process.execPath,
-      version: process.version,
-      argv: process.argv,
-      memoryUsage: process.memoryUsage()
-    },
-    os: {
-      freemem: os.freemem(),
-      totalmem: os.totalmem(),
-      loadavg: os.loadavg(),
-      uptime: os.uptime()
-    }
+    process: exports.processInfo(),
+    os: exports.osInfo()
   };
 };
 
@@ -56,5 +52,28 @@ exports.http = function(startedAt, req, res) {
       correlationId: resHeaders['x-msb-correlation-id']
     },
     ms: Date.now() - startedAt
+  };
+};
+
+exports.processInfo = function() {
+  return {
+    pid: process.pid,
+    uid: process.getuid ? process.getuid() : null,
+    gid: process.getgid ? process.getgid() : null,
+    cwd: process.cwd(),
+    execPath: process.execPath,
+    version: process.version,
+    argv: process.argv,
+    memoryUsage: process.memoryUsage()
+  };
+};
+
+exports.osInfo = function() {
+  return {
+    hostname: os.hostname(),
+    freemem: os.freemem(),
+    totalmem: os.totalmem(),
+    loadavg: os.loadavg(),
+    uptime: os.uptime()
   };
 };
