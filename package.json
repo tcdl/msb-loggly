@@ -1,6 +1,6 @@
 {
   "name": "msb-loggly",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "A plugin for msb/msb-proxies to log to Loggly",
   "main": "index.js",
   "scripts": {
