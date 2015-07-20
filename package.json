@@ -1,0 +1,27 @@
+{
+  "name": "msb-loggly",
+  "version": "0.6.0",
+  "description": "A plugin for msb/msb-proxies to log to Loggly",
+  "main": "index.js",
+  "scripts": {
+    "npmrc": "printf \"_auth = $NPM_AUTH_TOKEN\nemail = $NPM_EMAIL\n\" > .npmrc",
+    "test": "if [ -n \"${TRAVIS_TAG}\" ]; then npm run npmrc && npm publish; fi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tcdl/msb-loggly.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcdl/msb-loggly/issues"
+  },
+  "homepage": "https://github.com/tcdl/msb-loggly",
+  "dependencies": {
+    "lodash": "^3.10.0",
+    "loggly": "^1.0.8"
+  },
+  "devDependencies": {
+    "msb": ">=0.6.0 <1"
+  }
+}
