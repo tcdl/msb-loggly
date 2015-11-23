@@ -22,6 +22,6 @@
     "loggly": "^1.0.8"
   },
   "devDependencies": {
-    "msb": ">=0.6.0 <1"
+    "msb": "^0"
   }
 }

@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var msbConfig = require('msb/lib/config');
+var serviceDetails = require('msb/lib/support/serviceDetails');
 var loggly = require('loggly');
 var client;
 
@@ -21,9 +21,7 @@ exports._getClient = function() {
 };
 
 exports._getTags = function() {
-  var baseTags = (process.env.MSB_LOGGLY_TAGS || '').split();
-  var serviceName = _.get(msbConfig, 'serviceDetails.name');
-
-  baseTags.push(serviceName);
-  return _.uniq(baseTags);
+  var baseTags = _.filter((process.env.MSB_LOGGLY_TAGS || '').split());
+  if (serviceDetails.name) baseTags.push(serviceDetails.name);
+  return _.uniq(baseTags));
 };
